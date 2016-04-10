@@ -7,12 +7,12 @@
             <div class="row">
                 <div class="medium-6 columns">
                     <label>Given Name
-                        <input type="text" name="givenName" id="given-name" v-model="formData.givenName" />
+                        <input type="text" name="givenName" id="given-name" value="{{ formData.givenName }}" @keyup="reportChange" @change="reportChange" />
                     </label>
                 </div>
                 <div class="medium-6 columns">
                     <label>Surname
-                        <input type="text" name="surname" id="surname" v-model="formData.surname" />
+                        <input type="text" name="surname" id="surname"  value="{{ formData.surname }}" @keyup="reportChange" @change="reportChange" />
                     </label>
                 </div>
             </div>
@@ -20,12 +20,12 @@
             <div class="row">
                 <div class="medium-6 columns">
                     <label>Email
-                        <input type="email" name="email" id="email" v-model="formData.email" />
+                        <input type="email" name="email" id="email"  value="{{ formData.email }}" @keyup="reportChange" @change="reportChange" />
                     </label>
                 </div>
                 <div class="medium-6 columns">
                     <label>Phone
-                        <input type="tel" name="phone" id="phone" v-model="formData.phone" />
+                        <input type="tel" name="phone" id="phone"  value="{{ formData.phone }}" @keyup="reportChange" @change="reportChange" />
                     </label>
                 </div>
             </div>
@@ -35,12 +35,12 @@
             <div class="row">
                 <div class="medium-6 columns">
                     <label>House Name or #
-                        <input type="text" name="houseName" id="house-name" v-model="formData.houseName" />
+                        <input type="text" name="houseName" id="house-name"  value="{{ formData.houseName }}" @keyup="reportChange" @change="reportChange" />
                     </label>
                 </div>
                 <div class="medium-6 columns">
                     <label>Street
-                        <input type="text" name="street" id="street" v-model="formData.street" />
+                        <input type="text" name="street" id="street"  value="{{ formData.street }}" @keyup="reportChange" @change="reportChange" />
                     </label>
                 </div>
             </div>
@@ -48,12 +48,12 @@
             <div class="row">
                 <div class="medium-6 columns">
                     <label>Suburb
-                        <input type="text" name="suburb" id="suburb" v-model="formData.suburb" />
+                        <input type="text" name="suburb" id="suburb"  value="{{ formData.suburb }}" @keyup="reportChange" @change="reportChange" />
                     </label>
                 </div>
                 <div class="medium-6 columns">
                     <label>State
-                        <input type="tel" name="state" id="state" v-model="formData.state" />
+                        <input type="tel" name="state" id="state"  value="{{ formData.state }}" @keyup="reportChange" @change="reportChange" />
                     </label>
                 </div>
             </div>
@@ -61,12 +61,12 @@
             <div class="row">
                 <div class="medium-6 columns">
                     <label>Postcode
-                        <input type="text" name="postcode" id="postcode" v-model="formData.postcode" />
+                        <input type="text" name="postcode" id="postcode"  value="{{ formData.postcode }}" @keyup="reportChange" @change="reportChange" />
                     </label>
                 </div>
                 <div class="medium-6 columns">
                     <label>Country
-                        <input type="text" name="country" id="country" v-model="formData.country" />
+                        <input type="text" name="country" id="country"  value="{{ formData.country }}" @keyup="reportChange" @change="reportChange" />
                     </label>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                         var reader = new FileReader();
                         var self = this;
                         reader.onload = function (e) {
-                            self.formData.avatarDataUrl = e.target.result;
+                            self.reportChange(e);
                         }
                         reader.readAsDataURL(input.files[0]);
                     }
@@ -103,6 +103,9 @@
             },
             uploadAvatar() {
                 this.$els.avatar.click();
+            },
+            reportChange(e) {
+                this.$dispatch('form-change', e);
             }
         }
     }

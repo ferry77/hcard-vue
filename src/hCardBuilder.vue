@@ -1,7 +1,7 @@
 <template>
     <div class="row h-card-builder">
         <div class="columns small-12 large-6 form">
-            <h-card-form :form-data="hCard"></h-card-form>
+            <h-card-form :form-data="hCard" v-on:form-change="handleFormChange"></h-card-form>
         </div>
         <div class="columns small-12 large-6 preview">
             <h-card-preview :preview-data="hCard"></h-card-preview>
@@ -35,6 +35,17 @@
                     avatarDataUrl: ''
                 }
             }
+        },
+        methods: {
+
+            handleFormChange(e) {
+                if(e.target instanceof FileReader) {
+                    this.hCard = Object.assign({}, this.hCard, {avatarDataUrl : e.target.result})
+                } else {
+                    this.hCard = Object.assign({}, this.hCard, {[e.target.name] : e.target.value})
+                }
+            }
+
         }
     }
 </script>
